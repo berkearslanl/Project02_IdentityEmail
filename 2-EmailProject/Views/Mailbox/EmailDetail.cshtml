@@ -1,0 +1,255 @@
+﻿@model List<Message>
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Syndash - Bootstrap4 Admin Template</title>
+	<!--favicon-->
+	<link rel="icon" href="/vertical/assets/images/favicon-32x32.png" type="image/png" />
+	<!--plugins-->
+	<link href="/vertical/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="/vertical/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="/vertical/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<!-- loader-->
+	<link href="/vertical/assets/css/pace.min.css" rel="stylesheet" />
+	<script src="/vertical/assets/js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/vertical/assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto&display=swap" />
+	<!-- Icons CSS -->
+	<link rel="stylesheet" href="/vertical/assets/css/icons.css" />
+	<!-- App CSS -->
+	<link rel="stylesheet" href="/vertical/assets/css/app.css" />
+	<link rel="stylesheet" href="/vertical/assets/css/dark-sidebar.css" />
+	<link rel="stylesheet" href="/vertical/assets/css/dark-theme.css" />
+</head>
+<style>
+	body, .wrapper {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.page-wrapper {
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
+
+	.top-header {
+		left: 0 !important;
+		width: 100% !important;
+	}
+
+	.page-content-wrapper {
+		margin-left: 0 !important;
+	}
+</style>
+<body>
+	<div class="wrapper toggled">
+		@await Component.InvokeAsync("_MailboxHeaderComponentPartial")
+		<div class="page-wrapper">
+			<div class="page-content-wrapper">
+				<div class="page-content">
+					<div class="email-wrapper">
+						<div class="email-sidebar">
+							<div class="email-sidebar-header d-grid">
+								<a href="/Message/CreateMessage/" class="btn btn-primary compose-mail-btn"><i class='bx bx-plus me-2'></i> Mesaj Gönder</a>
+							</div>
+							<div class="email-sidebar-content">
+								<div class="email-navigation">
+									<div class="list-group list-group-flush">
+										<a href="/Mailbox/Index?folder=inbox" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "inbox" ? "active" : "")">
+											<i class='bx bxs-inbox me-3 font-20'></i><span>Gelen Kutusu</span>
+											<span class="badge bg-primary rounded-pill ms-auto">@ViewBag.mesaj</span>
+										</a>
+										<a href="/Mailbox/Index?folder=read" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "read" ? "active" : "")">
+											<i class='bx bxs-star me-3 font-20'></i><span>Okunan</span>
+											<span class="badge bg-success rounded-pill ms-auto">@ViewBag.okunmuş</span>
+										</a>
+										<a href="/Mailbox/Index?folder=unread" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "unread" ? "active" : "")">
+											<i class='bx bxs-star me-3 font-20'></i><span>Okunmayan</span>
+											<span class="badge bg-info text-dark rounded-pill ms-auto">@ViewBag.okunmamış</span>
+										</a>
+										<a href="/Mailbox/Index?folder=starred" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "starred" ? "active" : "")">
+											<i class='bx bxs-star me-3 font-20'></i><span>Yıldızlı</span>
+											<span class="badge bg-warning text-dark rounded-pill ms-auto">@ViewBag.yıldızlı</span>
+										</a>
+										<a href="/Mailbox/Index?folder=sent" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "sent" ? "active" : "")">
+											<i class='bx bxs-send me-3 font-20'></i><span>Gönderilen</span>
+											<span class="badge bg-secondary rounded-pill ms-auto">@ViewBag.gönderilenmesaj</span>
+										</a>
+										<a href="/Mailbox/Index?folder=draft" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "draft" ? "active" : "")">
+											<i class='bx bxs-file-blank me-3 font-20'></i><span>Taslaklar</span>
+											<span class="badge bg-dark rounded-pill ms-auto">@ViewBag.taslak</span>
+										</a>
+										<a href="/Mailbox/Index?folder=deleted" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "deleted" ? "active" : "")">
+											<i class='bx bxs-trash-alt me-3 font-20'></i><span>Çöp Kutusu</span>
+											<span class="badge bg-danger rounded-pill ms-auto">@ViewBag.çöp</span>
+										</a>
+									</div>
+								</div>
+
+								<div class="email-meeting">
+									<div class="list-group list-group-flush">
+										<div class="list-group-item border-0 mt-2">
+											<span style="font-weight:bolder">Kategoriler</span>
+										</div>
+										<a href="/Mailbox/Index?folder=job" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "job" ? "active" : "")">
+											<i class='bx bxs-briefcase me-3 font-20 text-primary'></i><span>İş</span>
+											<span class="badge rounded-pill ms-auto border border-primary text-primary">@ViewBag.iş</span>
+										</a>
+										<a href="/Mailbox/Index?folder=family" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "family" ? "active" : "")">
+											<i class='bx bxs-home-heart me-3 font-20 text-success'></i><span>Aile</span>
+											<span class="badge rounded-pill ms-auto border border-success text-success">@ViewBag.aile</span>
+										</a>
+										<a href="/Mailbox/Index?folder=education" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "education" ? "active" : "")">
+											<i class='bx bxs-graduation me-3 font-20 text-danger'></i><span>Eğitim</span>
+											<span class="badge rounded-pill ms-auto border border-danger text-danger">@ViewBag.eğitim</span>
+										</a>
+										<a href="/Mailbox/Index?folder=social" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "social" ? "active" : "")">
+											<i class='bx bxs-user-circle me-3 font-20 text-info'></i><span>Sosyal</span>
+											<span class="badge rounded-pill ms-auto border border-info text-info">@ViewBag.sosyal</span>
+										</a>
+										<a href="/Mailbox/Index?folder=other" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "other" ? "active" : "")">
+											<i class='bx bxs-category me-3 font-20 text-secondary'></i><span>Diğer</span>
+											<span class="badge rounded-pill ms-auto border border-secondary text-secondary">@ViewBag.diğer</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="email-header d-xl-flex align-items-center">
+							<div class="d-flex align-items-center">
+								<div class="email-toggle-btn">
+									<i class='bx bx-menu'></i>
+								</div>
+								<div class="btn btn-white">
+									<input class="form-check-input" type="checkbox" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Hepsini Seç">
+								</div>
+								<div class="">
+									<a href="/Mailbox/Index/" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Yenile">
+										<i class='bx bx-refresh me-0'></i>
+									</a>
+								</div>
+								<div class="">
+									<a href="#" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Yıldızla">
+										<i class='bx bx-star me-0'></i>
+									</a>
+								</div>
+								<div class="d-none d-md-flex">
+									<a href="#" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Okundu Yap">
+										<i class='bx bx-check-double me-0'></i>
+									</a>
+								</div>
+								<div class="">
+									<a href="#" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Sil">
+										<i class='bx bx-trash me-0'></i>
+									</a>
+								</div>
+							</div>
+							<div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+								<div class="input-group">
+									<span class="input-group-text bg-transparent"><i class="bx bx-search"></i></span>
+									<input type="text" class="form-control" placeholder="Maillerde arayın">
+								</div>
+							</div>
+							<div class="ms-auto d-flex align-items-center">
+								<button class="btn btn-sm btn-light">1-50</button>
+								<button class="btn btn-white px-2 ms-2">
+									<i class='bx bx-chevron-left me-0'></i>
+								</button>
+								<button class="btn btn-white px-2 ms-2">
+									<i class='bx bx-chevron-right me-0'></i>
+								</button>
+							</div>
+						</div>
+						<div class="email-content">
+							<div class="email-read-box p-3">
+								@foreach (var x in Model)
+								{
+								<div class="d-flex align-items-center">
+									<img src="https://i.pinimg.com/736x/62/01/0d/62010d848b790a2336d1542fcda51789.jpg" width="42" height="42" class="rounded-circle" alt="" />
+									
+										<div class="flex-grow-1 ms-2">
+											<p class="mb-0 font-weight-bold">@x.SenderEmail</p>
+											<p class="mb-0 chat-time ps-5 ms-auto">@x.Category.CategoryName - <span style="font-weight:bold">@x.Subject</span></p>
+										</div>
+									
+									<p class="mb-0 chat-time ps-5 ms-auto">@x.SendDate.ToString("dd MMM yyyy")</p>
+								</div>
+								
+								<div class="email-read-content px-md-5 py-5">
+									<p>@Html.Raw(x.MessageDetail)</p>
+								</div>
+							}
+							</div>
+						</div>
+						<div class="overlay email-toggle-btn-mobile"></div>
+					</div>
+					<!--end email wrapper-->
+				</div>
+			</div>
+			<!--end page-content-wrapper-->
+		</div>
+		<div class="overlay toggle-btn-mobile"></div>
+		<a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<div class="footer">
+			<p class="mb-0">
+				Syndash @DateTime.Now.Year | Tasarım : <a href="https://www.linkedin.com/in/mehmetberkearslan/" target="_blank">Mehmet Berke Arslan</a>
+			</p>
+		</div>
+	</div>
+	<div class="switcher-body">
+		<button class="btn btn-primary btn-switcher shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bx bx-cog bx-spin"></i></button>
+		<div class="offcanvas offcanvas-end shadow border-start-0 p-2" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
+			<div class="offcanvas-header border-bottom">
+				<h5 class="offcanvas-title" id="offcanvasScrollingLabel">Tema Düzenleyici</h5>
+				<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+			</div>
+			<div class="offcanvas-body">
+				<h6 class="mb-0">Tema Seçimi</h6>
+				<hr>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="lightmode" value="option1" checked>
+					<label class="form-check-label" for="lightmode">Açık</label>
+				</div>
+				<hr>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="darkmode" value="option2">
+					<label class="form-check-label" for="darkmode">Koyu</label>
+				</div>
+				<hr>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="darksidebar" value="option3">
+					<label class="form-check-label" for="darksidebar">Yarı Karanlık</label>
+				</div>
+				<hr>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="ColorLessIcons" value="option3">
+					<label class="form-check-label" for="ColorLessIcons">Daha Az Renkli Simgeler</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/vertical/assets/js/bootstrap.bundle.min.js"></script>
+	<script src="/vertical/assets/js/jquery.min.js"></script>
+	<script src="/vertical/assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="/vertical/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="/vertical/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script>
+		new PerfectScrollbar('.email-navigation');
+		new PerfectScrollbar('.email-list');
+	</script>
+	<!-- App JS -->
+	<script src="/vertical/assets/js/app.js"></script>
+</body>
+
+</html>
+
+

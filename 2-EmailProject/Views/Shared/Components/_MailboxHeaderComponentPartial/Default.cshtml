@@ -1,0 +1,143 @@
+﻿@model List<Message>
+<style>
+    /* Popup'ın genişliğini sabitleyelim */
+    .dropdown-lg .dropdown-menu {
+        min-width: 320px;
+        max-height: 500px;
+        overflow-y: auto; /* Çok mesaj varsa aşağı kaydırılabilir olsun */
+    }
+
+    /* Mesaj detayının tek satırda kalmasını ve taşmamasını sağlar */
+    .msg-info {
+        font-size: 13px;
+        color: #757575;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* Taşan kısmı ... yapar */
+        display: block;
+    }
+
+    /* Gönderen isminin altındaki boşluğu düzenleyelim */
+    .msg-name {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+</style>
+<header class="top-header">
+    <nav class="navbar navbar-expand">
+        <div class="left-topbar d-flex align-items-center">
+            <a href="javascript:;" class="toggle-btn">
+                <i class="bx bx-menu"></i>
+            </a>
+        </div>
+        <div class="flex-grow-1 search-bar">
+            <div class="input-group">
+                <button class="btn btn-search-back search-arrow-back" type="button"><i class="bx bx-arrow-back"></i></button>
+                <input type="text" class="form-control" placeholder="Ara.." />
+                <button class="btn btn-search" type="button"><i class="lni lni-search-alt"></i></button>
+            </div>
+        </div>
+        <div class="right-topbar ms-auto">
+            <ul class="navbar-nav">
+                <li class="nav-item search-btn-mobile">
+                    <a class="nav-link position-relative" href="javascript:;">
+                        <i class="bx bx-search vertical-align-middle"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown dropdown-lg">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="javascript:;" data-bs-toggle="dropdown">
+                        <span class="msg-count">@ViewBag.okunmamis</span>
+                        <i class="bx bx-comment-detail vertical-align-middle"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a href="javascript:;">
+                            <div class="msg-header">
+                                <h6 class="msg-header-title">@ViewBag.okunmamis</h6>
+                                <p class="msg-header-subtitle">Son Gelen Mesajlar</p>
+                            </div>
+                        </a>
+                        <div class="header-message-list">
+                            @if (Model.Count>0)
+                            {
+                                @foreach (var x in Model)
+                                {
+                                    var plainText = System.Text.RegularExpressions.Regex.Replace(x.MessageDetail ?? "", "<.*?>", string.Empty);
+                                    var shortMessage = plainText.Length > 30 ? plainText.Substring(0, 30) + "..." : plainText;
+
+                                    <a class="dropdown-item" href="/Mailbox/EmailDetail/@x.MessageId">
+                                        <div class="d-flex align-items-center">
+                                            <div class="user-online">
+                                                <img src="https://i.pinimg.com/736x/62/01/0d/62010d848b790a2336d1542fcda51789.jpg" class="msg-avatar" alt="user avatar">
+                                            </div>
+                                            <div class="flex-grow-1 ms-2">
+                                                <h6 class="msg-name mb-0">
+                                                    @if (@x.SenderEmail.Length > 22)
+                                                    {
+                                                        @x.SenderEmail.Substring(0, 22)
+                                            
+                                                        <span>..</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        @x.SenderEmail
+                                                    }
+                                                    <span class="msg-time float-end text-muted small">
+                                                        @x.SendDate.ToString("dd MMM yyyy")
+                                                    </span>
+                                                </h6>
+                                                <p class="msg-info mb-0 text-truncate" style="max-width: 200px;">@shortMessage</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                }
+
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center">
+                                    <h6 class="msg-name mb-0">
+                                    Okunmamış Mesajınız Bulunmamaktadır!    
+                                    </h6>
+                                </div>
+                            }
+                        </div>
+                        <a href="/Mailbox/Index/">
+                            <div class="text-center msg-footer">Tüm Mesajları Gör</div>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown dropdown-user-profile">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                        <div class="d-flex user-box align-items-center">
+                            <div class="user-info">
+                                <p class="user-name mb-0">@ViewBag.user</p>
+                                <p class="designattion mb-0">@ViewBag.username</p>
+                            </div>
+                            <img src="/images/@ViewBag.image" class="user-img" alt="user avatar">
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="/Mailbox/ProfileDetail/">
+                            <i class="bx bx-user"></i><span>Profil</span>
+                        </a>
+                        <a class="dropdown-item" href="/Profile/Index/">
+                            <i class="bx bx-cog"></i><span>Ayarlar</span>
+                        </a>
+                        <a class="dropdown-item" href="javascript:;">
+                            <i class="bx bx-tachometer"></i><span>Dashboard</span>
+                        </a>
+                        <a class="dropdown-item" href="javascript:;">
+                            <i class="bx bx-wallet"></i><span>Mesajlar</span>
+                        </a>
+                        <a class="dropdown-item" href="/Message/CreateMessage/">
+                            <i class="bx bx-cloud-download"></i><span>Mesaj Gönder</span>
+                        </a>
+                        <div class="dropdown-divider mb-0"></div>	<a class="dropdown-item" href="/Mailbox/LogOut/">
+                            <i class="bx bx-power-off"></i><span>Çıkış Yap</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

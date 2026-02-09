@@ -1,0 +1,144 @@
+﻿@model Message
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yeni Mesaj Oluştur</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .btn-send {
+            background-color: #0d6efd;
+            border-radius: 8px;
+            padding: 10px 20px;
+            transition: 0.3s;
+        }
+
+            .btn-send:hover {
+                background-color: #0b5ed7;
+                transform: translateY(-2px);
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="card-header bg-white border-0 text-center">
+                        <h3 class="fw-bold text-primary"><i class="fa-regular fa-paper-plane me-2"></i>Yeni Mesaj</h3>
+                        <p class="text-muted">Lütfen mesaj detaylarını aşağıya girin.</p>
+                    </div>
+
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fa-solid fa-envelope me-1"></i> Alıcı Email</label>
+                                <input type="email" asp-for="ReceiverEmail" class="form-control" placeholder="örnek@mail.com" required />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fa-solid fa-heading me-1"></i> Konu</label>
+                                <input type="text" asp-for="Subject" class="form-control" placeholder="Mesajınızın konusu..." required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"><i class="fa-solid fa-tags me-1"></i> Kategori</label>
+                                <select asp-for="CategoryId" class="form-select" asp-items="@ViewBag.categories" required>
+                                    <option value="" disabled selected>Bir kategori seçin...</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label"><i class="fa-solid fa-pen-nib me-1"></i> Mesajınız</label>
+
+                                <div id="editor-container" style="height: 250px; background: white;"></div>
+
+                                <input type="hidden" asp-for="MessageDetail" id="quill_html">
+                            </div>
+                            <script>
+                                var quill = new Quill('#editor-container', {
+                                    modules: {
+                                        toolbar: [
+                                            [{ 'header': [1, 2, false] }],
+                                            ['bold', 'italic', 'underline'],
+                                            [{ 'color': [] }, { 'background': [] }], // Renk ve Arka Plan
+                                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                            ['clean'] // Formatı temizle
+                                        ]
+                                    },
+                                    placeholder: 'Mesajınızı buraya yazın...',
+                                    theme: 'snow'
+                                });
+
+                                // Quill içindeki değişikliği gizli inputa aktar (Form gönderilirken dolu gitmesi için)
+                                quill.on('text-change', function() {
+                                    document.getElementById('quill_html').value = quill.root.innerHTML;
+                                });
+                            </script>
+
+                            <div class="d-flex gap-2">
+                                <button type="submit" name="actionType" value="send" class="btn btn-primary btn-send flex-grow-1">
+                                    <i class="fa-solid fa-share me-2"></i>Mesajı Gönder
+                                </button>
+
+                                <button type="submit" name="actionType" value="draft" class="btn btn-outline-secondary py-2 px-3" style="border-radius: 8px;">
+                                    <i class="fa-solid fa-floppy-disk me-2"></i>Taslağa Kaydet
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a href="/Mailbox/Index/" class="text-decoration-none text-muted small"><i class="fa-solid fa-arrow-left me-1"></i> Gelen Kutusuna Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+@* @model Message
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <br /><br />
+    <label>Alıcı Email</label>
+    <input type="text" asp-for="ReceiverEmail" class="form-control"/>
+    <br />
+    <label>Konu</label>
+    <input type="text" asp-for="Subject" class="form-control" />
+    <br />
+    <label>Mesaj</label>
+    <input type="text" asp-for="MessageDetail" class="form-control" />
+    <br />
+    <button>Mesajı Gönder</button>
+</div> *@

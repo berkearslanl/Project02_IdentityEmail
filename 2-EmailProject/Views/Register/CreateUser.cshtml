@@ -1,0 +1,507 @@
+﻿@model UserRegisterDto
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container-wrapper {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 50px 40px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        keyframes slideUp {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .header h1 {
+                font-family: 'Poppins', sans-serif;
+                font-size: 28px;
+                font-weight: 700;
+                color: #1a202c;
+                margin-bottom: 8px;
+            }
+
+            .header p {
+                color: #718096;
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+            .form-row.full {
+                grid-template-columns: 1fr;
+            }
+
+        .form-group {
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+            .form-group:nth-child(1) {
+                animation-delay: 0.1s;
+            }
+
+            .form-group:nth-child(2) {
+                animation-delay: 0.15s;
+            }
+
+            .form-group:nth-child(3) {
+                animation-delay: 0.2s;
+            }
+
+            .form-group:nth-child(4) {
+                animation-delay: 0.25s;
+            }
+
+            .form-group:nth-child(5) {
+                animation-delay: 0.3s;
+            }
+
+        label {
+            display: block;
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: #f7fafc;
+        }
+
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="password"]:focus {
+                outline: none;
+                border-color: #667eea;
+                background: white;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+            input[type="text"]::placeholder,
+            input[type="email"]::placeholder,
+            input[type="password"]::placeholder {
+                color: #a0aec0;
+            }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #718096;
+            font-size: 18px;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+            .password-toggle:hover {
+                color: #667eea;
+            }
+
+        .validation-error {
+            color: #e53e3e;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .error-summary {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            color: #c53030;
+            font-size: 13px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+            .error-summary ul {
+                list-style: none;
+                padding-left: 0;
+            }
+
+            .error-summary li {
+                margin-bottom: 4px;
+            }
+
+                .error-summary li:last-child {
+                    margin-bottom: 0;
+                }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            animation: slideUp 0.6s ease-out 0.35s both;
+        }
+
+            .submit-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            }
+
+            .submit-btn:active {
+                transform: translateY(0);
+            }
+
+        .accept-btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .accept-btn:hover {
+                transform: translateY(-2px);
+                opacity: 0.9;
+            }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #718096;
+            font-size: 13px;
+            animation: slideUp 0.6s ease-out 0.4s both;
+        }
+
+            .footer-text a {
+                color: #667eea;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+
+                .footer-text a:hover {
+                    color: #764ba2;
+                }
+
+
+        /* Modal Arka Planı */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Modal Kutusu */
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .modal-body {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 20px 0;
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .close-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: #a0aec0;
+        }
+
+            .close-modal:hover {
+                color: #e53e3e;
+            }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="card">
+            <div class="header">
+                <h1>Hesap Oluştur</h1>
+                <p>Aşağıdaki bilgileri doldurarak başlayın</p>
+            </div>
+
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="error-summary"></div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Adınız</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="name" asp-for="Name" placeholder="Ad" required />
+                        </div>
+                        <span asp-validation-for="Name" class="validation-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname">Soyadınız</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="surname" asp-for="Surname" placeholder="Soyad" required />
+                        </div>
+                        <span asp-validation-for="Surname" class="validation-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="username">Kullanıcı Adı</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="username" asp-for="Username" placeholder="Kullanıcı adınızı girin" required />
+                        </div>
+                        <span asp-validation-for="Username" class="validation-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="email">Email Adresiniz</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="email" asp-for="Email" placeholder="ornek@email.com" required />
+                        </div>
+                        <span asp-validation-for="Email" class="validation-error"></span>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="password">Şifre</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="password" asp-for="Password" placeholder="Güvenli bir şifre girin" required />
+                            <span class="password-toggle" onclick="togglePassword()">👁️</span>
+                        </div>
+                        <span asp-validation-for="Password" class="validation-error"></span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 15px; display: flex; align-items: flex-start; gap: 10px;">
+                    <input type="checkbox" id="termsCheckbox" style="margin-top: 4px; cursor: pointer;">
+                    <label for="termsCheckbox" style="text-transform: none; color: #718096; font-size: 13px; cursor: pointer;">
+                        <a href="javascript:void(0)" onclick="openModal()" style="color: #667eea; text-decoration: underline;">Kullanım Şartları ve Gizlilik Politikası</a>'nı okudum, kabul ediyorum.
+                    </label>
+                </div>
+                <div id="termsModal" class="modal-overlay">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Kullanım Şartları</h2>
+                            <span class="close-modal" onclick="closeModal()">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <strong>1. Genel Kurallar</strong><br>
+                                Bu sisteme kayıt olan tüm kullanıcılar, sunulan hizmetleri yürürlükteki mevzuata ve genel ahlak kurallarına uygun şekilde kullanmayı kabul eder.
+                                Platform, e-posta gönderme ve mesajlaşma hizmetleri sunar; bu hizmetler yalnızca yasal ve etik amaçlarla kullanılmalıdır.
+                                Spam, yanıltıcı içerik, izinsiz reklam veya üçüncü kişilerin haklarını ihlal eden paylaşımlar yasaktır.
+                            </p>
+
+                            <p>
+                                <strong>2. Gizlilik ve Veri Güvenliği</strong><br>
+                                Kullanıcılara ait e-posta adresleri, mesaj içerikleri ve diğer kişisel veriler gizlilik esaslarına uygun olarak korunur.
+                                Veriler, hizmetin sağlanması dışında üçüncü kişilerle paylaşılmaz ve yetkisiz erişimlere karşı teknik ve idari önlemlerle güvence altına alınır.
+                                Sistem üzerinden gönderilen mesajlar, hizmet kalitesini artırmak ve güvenliği sağlamak amacıyla sınırlı ölçüde işlenebilir.
+                            </p>
+
+                            <p>
+                                <strong>3. İletişim İçerikleri</strong><br>
+                                Kullanıcılar, gönderdikleri e-posta ve mesajların içeriğinden tamamen kendileri sorumludur.
+                                Platform, kullanıcılar tarafından oluşturulan içerikleri önceden kontrol etmekle yükümlü değildir; ancak gerekli görüldüğünde
+                                hukuka aykırı veya sistemin işleyişini bozacak içerikleri kaldırma hakkını saklı tutar.
+                            </p>
+
+                            <p>
+                                <strong>4. Sorumluluğun Sınırlandırılması</strong><br>
+                                berkearslan projesi kapsamında sunulan bu hizmet, mevcut haliyle sağlanmaktadır.
+                                Sistem kesintileri, gecikmeler veya teknik aksaklıklardan doğabilecek doğrudan ya da dolaylı zararlardan platform sorumlu tutulamaz.
+                                Kullanıcı, hizmeti kullanarak bu koşulları kabul etmiş sayılır.
+                            </p>
+
+                            <p>
+                                <strong>5. Değişiklikler</strong><br>
+                                Kullanım ve gizlilik şartları, gerekli görüldüğü takdirde güncellenebilir.
+                                Güncel şartlar, sistem üzerinden yayınlandığı andan itibaren geçerli kabul edilir.
+                            </p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="accept-btn" style="margin-top:0" onclick="acceptTerms()">Okudum, Onaylıyorum</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Kayıt Ol</button>
+
+                <p class="footer-text">
+                    Zaten hesabınız var mı? <a href="/Login/UserLogin/">Giriş yapın</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggle = document.querySelector('.password-toggle');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+
+                const modal = document.getElementById('termsModal');
+        const checkbox = document.getElementById('termsCheckbox');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        // İlk başta butonu pasif yap (Ödev gereği)
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.5";
+        submitBtn.style.cursor = "not-allowed";
+
+        function openModal() {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        function acceptTerms() {
+            checkbox.checked = true;
+            toggleSubmitButton();
+            closeModal();
+        }
+
+        // Checkbox elle tıklandığında butonu kontrol et
+        checkbox.addEventListener('change', toggleSubmitButton);
+
+        function toggleSubmitButton() {
+            if (checkbox.checked) {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = "1";
+                submitBtn.style.cursor = "pointer";
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = "0.5";
+                submitBtn.style.cursor = "not-allowed";
+            }
+        }
+
+        // Modal dışına tıklandığında kapatma
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
+

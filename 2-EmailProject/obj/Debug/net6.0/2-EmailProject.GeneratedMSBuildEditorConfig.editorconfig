@@ -1,0 +1,97 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = _2_EmailProject
+build_property.RootNamespace = _2_EmailProject
+build_property.ProjectDir = C:\Users\berke\OneDrive\Masaüstü\ASP.NET Murat Yücedağ\2-EmailProject\2-EmailProject\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\berke\OneDrive\Masaüstü\ASP.NET Murat Yücedağ\2-EmailProject\2-EmailProject
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 6.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Email/SendEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1haWxcU2VuZEVtYWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Login/UserLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cVXNlckxvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Mailbox/EmailDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFpbGJveFxFbWFpbERldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Mailbox/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFpbGJveFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Mailbox/ProfileDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFpbGJveFxQcm9maWxlRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Message/CreateMessage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZVxDcmVhdGVNZXNzYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Message/Inbox.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVzc2FnZVxJbmJveC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Profile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Register/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcQ29uZmlybUVtYWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Register/CreateUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcQ3JlYXRlVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Shared/Components/_MailboxHeaderComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcX01haWxib3hIZWFkZXJDb21wb25lbnRQYXJ0aWFsXERlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Shared/Components/_MailboxMainComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcX01haWxib3hNYWluQ29tcG9uZW50UGFydGlhbFxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/berke/OneDrive/Masaüstü/ASP.NET Murat Yücedağ/2-EmailProject/2-EmailProject/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-5fkm8529r8

@@ -1,0 +1,248 @@
+﻿@model List<Message>
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="email-wrapper">
+                <div class="email-sidebar">
+                    <div class="email-sidebar-header d-grid">
+                        <a href="/Message/CreateMessage/" class="btn btn-primary compose-mail-btn"><i class='bx bx-plus me-2'></i> Mesaj Gönder</a>
+                    </div>
+                    <div class="email-sidebar-content">
+                        <div class="email-navigation">
+                            <div class="list-group list-group-flush">
+                                <a href="/Mailbox/Index?folder=inbox" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "inbox" ? "active" : "")">
+                                    <i class='bx bxs-inbox me-3 font-20'></i><span>Gelen Kutusu</span>
+                                    <span class="badge bg-primary rounded-pill ms-auto">@ViewBag.mesaj</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=read" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "read" ? "active" : "")">
+                                    <i class='bx bxs-star me-3 font-20'></i><span>Okunan</span>
+                                    <span class="badge bg-success rounded-pill ms-auto">@ViewBag.okunmuş</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=unread" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "unread" ? "active" : "")">
+                                    <i class='bx bxs-star me-3 font-20'></i><span>Okunmayan</span>
+                                    <span class="badge bg-info text-dark rounded-pill ms-auto">@ViewBag.okunmamış</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=starred" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "starred" ? "active" : "")">
+                                    <i class='bx bxs-star me-3 font-20'></i><span>Yıldızlı</span>
+                                    <span class="badge bg-warning text-dark rounded-pill ms-auto">@ViewBag.yıldızlı</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=sent" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "sent" ? "active" : "")">
+                                    <i class='bx bxs-send me-3 font-20'></i><span>Gönderilen</span>
+                                    <span class="badge bg-secondary rounded-pill ms-auto">@ViewBag.gönderilenmesaj</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=draft" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "draft" ? "active" : "")">
+                                    <i class='bx bxs-file-blank me-3 font-20'></i><span>Taslaklar</span>
+                                    <span class="badge bg-dark rounded-pill ms-auto">@ViewBag.taslak</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=deleted" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "deleted" ? "active" : "")">
+                                    <i class='bx bxs-trash-alt me-3 font-20'></i><span>Çöp Kutusu</span>
+                                    <span class="badge bg-danger rounded-pill ms-auto">@ViewBag.çöp</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="email-meeting">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item border-0 mt-2">
+                                    <span style="font-weight:bolder">Kategoriler</span>
+                                </div>
+                                <a href="/Mailbox/Index?folder=job" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "job" ? "active" : "")">
+                                    <i class='bx bxs-briefcase me-3 font-20 text-primary'></i><span>İş</span>
+                                    <span class="badge rounded-pill ms-auto border border-primary text-primary">@ViewBag.iş</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=family" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "family" ? "active" : "")">
+                                    <i class='bx bxs-home-heart me-3 font-20 text-success'></i><span>Aile</span>
+                                    <span class="badge rounded-pill ms-auto border border-success text-success">@ViewBag.aile</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=education" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "education" ? "active" : "")">
+                                    <i class='bx bxs-graduation me-3 font-20 text-danger'></i><span>Eğitim</span>
+                                    <span class="badge rounded-pill ms-auto border border-danger text-danger">@ViewBag.eğitim</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=social" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "social" ? "active" : "")">
+                                    <i class='bx bxs-user-circle me-3 font-20 text-info'></i><span>Sosyal</span>
+                                    <span class="badge rounded-pill ms-auto border border-info text-info">@ViewBag.sosyal</span>
+                                </a>
+                                <a href="/Mailbox/Index?folder=other" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "other" ? "active" : "")">
+                                    <i class='bx bxs-category me-3 font-20 text-secondary'></i><span>Diğer</span>
+                                    <span class="badge rounded-pill ms-auto border border-secondary text-secondary">@ViewBag.diğer</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="email-header d-xl-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="email-toggle-btn">
+                            <i class='bx bx-menu'></i>
+                        </div>
+                        <div class="btn btn-white">
+                            <input class="form-check-input" type="checkbox" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Hepsini Seç">
+                        </div>
+                        <div class="">
+                            <a href="/Mailbox/Index/" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Yenile">
+                                <i class='bx bx-refresh me-0'></i>
+                            </a>
+                        </div>
+                        <div class="">
+                            <a href="#" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Yıldızla">
+                                <i class='bx bx-star me-0'></i>
+                            </a>
+                        </div>
+                        <div class="d-none d-md-flex">
+                            <a href="#" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Okundu Yap">
+                                <i class='bx bx-check-double me-0'></i>
+                            </a>
+                        </div>
+                        <div class="">
+                            <a href="#" class="btn btn-white ms-2" data-bs-toggle="tooltip" data-bs-placemenet="top" title="Sil">
+                                <i class='bx bx-trash me-0'></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent"><i class="bx bx-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Maillerde arayın">
+                        </div>
+                    </div>
+                    <div class="ms-auto d-flex align-items-center">
+                        <button class="btn btn-sm btn-light">1-@ViewBag.mesaj</button>
+                        <button class="btn btn-white px-2 ms-2">
+                            <i class='bx bx-chevron-left me-0'></i>
+                        </button>
+                        <button class="btn btn-white px-2 ms-2">
+                            <i class='bx bx-chevron-right me-0'></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="email-content">
+                    <div class="">
+
+                        <div class="email-list">
+                            @foreach (var x in Model)
+                            {
+                                <div class="d-flex align-items-center border-bottom email-row-container">
+
+                                    <a href="/Mailbox/EmailDetail/@x.MessageId/" class="text-reset text-decoration-none flex-grow-1 overflow-hidden">
+                                        <div class="d-md-flex align-items-center email-message px-3 py-1">
+
+                                            <div class="d-flex align-items-center flex-shrink-0" style="width: 70px;">
+                                                <input class="form-check-input flex-shrink-0" type="checkbox" value="" />
+
+                                                <div class="ms-2 flex-shrink-0">
+                                                    @if (x.IsStars)
+                                                    {
+                                                        <i class='bx bxs-star text-warning font-20 email-star'></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class='bx bx-star font-20 email-star text-muted'></i>
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div class="flex-shrink-0 d-flex align-items-center ms-2" style="width: 280px;">
+                                                <p class="mb-0 text-truncate">
+                                                    <b class="me-1">@x.Subject</b>
+                                                    <span class="badge rounded-pill bg-light-primary text-primary px-3 shadow-sm" style="font-size: 10px; text-transform: uppercase; vertical-align: middle;">
+                                                        @x.Category?.CategoryName
+                                                    </span>
+                                                </p>
+                                            </div>
+
+                                            <div class="ms-3 flex-grow-1 text-truncate text-muted" style="font-size: 13px;">
+                                                @Html.Raw(x.MessageDetail)
+                                            </div>
+
+                                            <div class="ms-auto ps-3 text-end flex-shrink-0" style="width: 110px;">
+                                                <p class="mb-0 email-time text-muted" style="font-size: 12px;">@x.SendDate.ToString("dd MMM yyyy")</p>
+                                            </div>
+
+                                        </div>
+                                    </a>
+
+                                    <div class="dropdown me-3 flex-shrink-0">
+                                        <button class="btn btn-link text-dark shadow-none p-0" type="button" data-bs-toggle="dropdown">
+                                            <i class='bx bx-dots-vertical-rounded font-20'></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                            <li>
+                                                <a class="dropdown-item py-2" href="/Mailbox/DeleteMail/@x.MessageId" onclick="deleteMessage(@x.MessageId)">
+                                                    <i class='bx bx-trash me-2 text-danger'></i> Sil
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item py-2" href="/Mailbox/StarsMail/@x.MessageId" onclick="toggleStar(@x.MessageId)">
+                                                    @if (x.IsStars) // Eğer mesaj zaten yıldızlıysa
+                                                    {
+                                                        <span><i class='bx bxs-star me-2 text-warning'></i> Yıldızı Kaldır</span>
+                                                    }
+                                                    else // Eğer mesaj yıldızlı değilse
+                                                    {
+                                                        <span><i class='bx bx-star me-2 text-warning'></i> Yıldızla</span>
+                                                    }
+                                                </a>
+                                            </li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li>
+                                                <a class="dropdown-item py-2" href="/Mailbox/ReadMail/@x.MessageId" onclick="toggleStatus(@x.MessageId, @x.IsStatus.ToString().ToLower())">
+                                                    @if (x.IsStatus)
+                                                    {
+                                                        <span><i class='bx bx-envelope-open me-2'></i> Okunmadı Yap</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span><i class='bx bx-envelope me-2'></i> Okundu Yap</span>
+                                                    }
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="overlay email-toggle-btn-mobile"></div>
+            </div>
+            <!--end email wrapper-->
+        </div>
+    </div>
+    <!--end page-content-wrapper-->
+</div>
+<script>
+        function toggleStatus(id, currentStatus) {
+        // currentStatus true ise false'a, false ise true'ya çekecek bir API çağrısı yapmalısın.
+        console.log("Mesaj ID:", id, "Şu anki durum:", currentStatus);
+        // $.post("/Mailbox/ChangeStatus/" + id, function(data) { ... });
+    }
+</script>
+
+                @*
+                    <div class="email-navigation">
+                            <div class="list-group list-group-flush">
+                                <a href="/Mailbox/Index?folder=inbox" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "inbox" ? "active" : "")"><i class='bx bxs-inbox me-3 font-20'></i><span>Gelen Kutusu</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.mesaj</span></a>
+                                <a href="/Mailbox/Index?folder=read" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "read" ? "active" : "")"><i class='bx bxs-star me-3 font-20'></i><span>Okunan</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.okunmuş</span></a>
+                                <a href="/Mailbox/Index?folder=unread" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "unread" ? "active" : "")"><i class='bx bxs-star me-3 font-20'></i><span>Okunmayan</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.okunmamış</span></a>
+                                <a href="/Mailbox/Index?folder=starred" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "starred" ? "active" : "")"><i class='bx bxs-star me-3 font-20'></i><span>Yıldızlı</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.yıldızlı</span></a>
+                                <a href="/Mailbox/Index?folder=sent" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "sent" ? "active" : "")"><i class='bx bxs-send me-3 font-20'></i><span>Gönderilen</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.gönderilenmesaj</span></a>
+                                <a href="/Mailbox/Index?folder=draft" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "draft" ? "active" : "")"><i class='bx bxs-file-blank me-3 font-20'></i><span>Taslaklar</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.taslak</span></a>
+                                <a href="/Mailbox/Index?folder=deleted" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "deleted" ? "active" : "")"><i class='bx bxs-trash-alt me-3 font-20'></i><span>Çöp Kutusu</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.çöp</span></a>
+                            </div>
+                        </div>
+                        <div class="email-meeting">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <span style="font-weight:bolder">Kategoriler</span>
+                                </div>
+                                <a href="/Mailbox/Index?folder=job" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "job" ? "active" : "")"><i class='bx bxs-video me-3 font-20'></i><span>İş</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.iş</span></a>
+                                <a href="/Mailbox/Index?folder=family" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "family" ? "active" : "")"><i class='bx bxs-group me-3 font-20'></i><span>Aile</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.aile</span></a>
+                                <a href="/Mailbox/Index?folder=education" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "education" ? "active" : "")"><i class='bx bxs-group me-3 font-20'></i><span>Eğitim</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.eğitim</span></a>
+                                <a href="/Mailbox/Index?folder=social" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "social" ? "active" : "")"><i class='bx bxs-group me-3 font-20'></i><span>Sosyal</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.sosyal</span></a>
+                                <a href="/Mailbox/Index?folder=other" class="list-group-item border-0 d-flex align-items-center @(ViewBag.ActiveFolder == "other" ? "active" : "")"><i class='bx bxs-group me-3 font-20'></i><span>Diğer</span><span class="badge bg-primary rounded-pill ms-auto">@ViewBag.diğer</span></a>
+
+                            </div>
+                        </div>
+                *@

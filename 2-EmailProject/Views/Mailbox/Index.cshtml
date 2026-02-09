@@ -1,0 +1,101 @@
+﻿@model List<Message>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>Syndash - Bootstrap4 Admin Template</title>
+	<!--favicon-->
+	<link rel="icon" href="/vertical/assets/images/favicon-32x32.png" type="image/png" />
+	<!--plugins-->
+	<link href="/vertical/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+	<link href="/vertical/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
+	<link href="/vertical/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<!-- loader-->
+	<link href="/vertical/assets/css/pace.min.css" rel="stylesheet" />
+	<script src="/vertical/assets/js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="/vertical/assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto&display=swap" />
+	<!-- Icons CSS -->
+	<link rel="stylesheet" href="/vertical/assets/css/icons.css" />
+	<!-- App CSS -->
+	<link rel="stylesheet" href="/vertical/assets/css/app.css" />
+	<link rel="stylesheet" href="/vertical/assets/css/dark-sidebar.css" />
+	<link rel="stylesheet" href="/vertical/assets/css/dark-theme.css" />
+</head>
+<style>
+	body, .wrapper {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	.page-wrapper {
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+	}
+
+	.top-header {
+		left: 0 !important;
+		width: 100% !important;
+	}
+
+	.page-content-wrapper {
+		margin-left: 0 !important;
+	}
+
+</style>
+<body>
+	<div class="wrapper toggled">
+		@await Component.InvokeAsync("_MailboxHeaderComponentPartial")
+		@await Component.InvokeAsync("_MailboxMainComponentPartial")
+		<div class="overlay toggle-btn-mobile"></div>
+		<a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<div class="footer">
+			<p class="mb-0">
+				Syndash @DateTime.Now.Year | Tasarım : <a href="https://www.linkedin.com/in/mehmetberkearslan/" target="_blank">Mehmet Berke Arslan</a>
+			</p>
+		</div>
+	</div>
+	<div class="switcher-body">
+		<button class="btn btn-primary btn-switcher shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bx bx-cog bx-spin"></i></button>
+		<div class="offcanvas offcanvas-end shadow border-start-0 p-2" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
+		  <div class="offcanvas-header border-bottom">
+			<h5 class="offcanvas-title" id="offcanvasScrollingLabel">Tema Düzenleyici</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+		  </div>
+		  <div class="offcanvas-body">
+			<h6 class="mb-0">Tema Seçimi</h6>
+			<hr>
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="lightmode" value="option1" checked>
+			  <label class="form-check-label" for="lightmode">Açık</label>
+			</div>
+			<hr>
+			<div class="form-check form-check-inline">
+			  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="darkmode" value="option2">
+			  <label class="form-check-label" for="darkmode">Koyu</label>
+			</div>
+		  </div>
+		</div>
+	   </div>
+	<script src="/vertical/assets/js/bootstrap.bundle.min.js"></script>
+	<script src="/vertical/assets/js/jquery.min.js"></script>
+	<script src="/vertical/assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="/vertical/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="/vertical/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script>
+		new PerfectScrollbar('.email-navigation');
+		new PerfectScrollbar('.email-list');
+	</script>
+	<!-- App JS -->
+	<script src="/vertical/assets/js/app.js"></script>
+</body>
+
+</html>

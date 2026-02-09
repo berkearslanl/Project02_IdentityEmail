@@ -1,0 +1,225 @@
+﻿@model List<Message>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gelen Kutusu | berkearslanl</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .inbox-wrapper {
+            margin-top: 50px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .table thead {
+            background-color: #f8f9fa;
+        }
+
+            .table thead th {
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                color: #8898aa;
+                letter-spacing: 1px;
+                padding: 15px;
+                border: none;
+            }
+
+        .table tbody tr {
+            transition: all 0.2s;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+            .table tbody tr:hover {
+                background-color: #f8fbff;
+            }
+
+        .avatar-circle {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .btn-action {
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        /* Modal Styles */
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .message-content-area {
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 150px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container inbox-wrapper">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="fw-bold text-dark mb-0"><i class="fa-solid fa-envelope-open-text me-2 text-primary"></i> Mesajlarım</h2>
+                <span class="badge bg-light text-dark border">
+                    <i class="fa-solid fa-user-circle me-1 text-primary"></i>
+                    Kullanıcı: @ViewBag.mail
+                </span>
+                <small class="text-muted">Toplam @ViewBag.okunmamismesaj okunmamış mesajınız var.</small>
+            </div>
+            <a href="/Message/CreateMessage" class="btn btn-primary shadow-sm px-4">
+                <i class="fa-solid fa-paper-plane me-2"></i>Yeni Mesaj
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th class="ps-4">Gönderici</th>
+                            <th>Konu</th>
+                            <th>Tarih</th>
+                            <th class="text-end pe-4">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var x in Model)
+                        {
+                            <tr style="@(x.IsStatus ? "" : "font-weight: bold; background-color: #f0f7ff;")">
+                                <td class="ps-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar-circle me-3">
+                                            @x.SenderEmail.Substring(0, 1).ToUpper()
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold text-dark">@x.SenderEmail</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="text-secondary">@x.Subject</span>
+                                </td>
+                                <td>
+                                    <span class="text-muted small">@x.SendDate.ToString("dd MMM yyyy HH:mm")</span>
+                                </td>
+                                <td class="text-end pe-4">
+                                    <button type="button" class="btn btn-light btn-action text-primary me-2"
+                                            onclick="openMessageModal('@x.SenderEmail', '@x.Subject', '@x.MessageId', '@x.SendDate.ToString("g")', `@x.MessageDetail`)">
+                                        <i class="fa-solid fa-eye me-1"></i> Oku
+                                    </button>
+                                    <a href="/Message/MessageDelete/@x.MessageId" class="btn btn-light btn-action text-danger"
+                                       onclick="return confirm('Bu mesajı kalıcı olarak silmek istiyor musunuz?')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="messageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="modalSubject">Mesaj Detayı</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                        <div>
+                            <small class="text-muted d-block">Gönderen:</small>
+                            <strong id="modalSender"></strong>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-muted d-block">Tarih:</small>
+                            <small id="modalDate" class="fw-bold"></small>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <small class="text-muted">Mesaj:</small>
+                    </div>
+                    <div class="message-content-area" id="modalBody">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Kapat</button>
+                    <a href="#" id="modalDeleteBtn" class="btn btn-danger">Mesajı Sil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+                function openMessageModal(sender, subject, id, date, content) {
+            // 1. Modal içindeki alanları doldur
+            document.getElementById('modalSender').innerText = sender;
+            document.getElementById('modalSubject').innerText = subject;
+            document.getElementById('modalDate').innerText = date;
+            document.getElementById('modalBody').innerText = content;
+            document.getElementById('modalDeleteBtn').href = "/Message/MessageDelete/" + id;
+
+            // 2. SUNUCUYA OKUNDU BİLGİSİ GÖNDER (AJAX)
+            fetch('/Message/MarkAsRead/' + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Mesaj okundu olarak işaretlendi.");
+                    // İstersen burada okundu bilgisini UI'da anlık değiştirebilirsin
+                }
+            });
+
+            // 3. Modalı göster
+            var myModal = new bootstrap.Modal(document.getElementById('messageModal'));
+            myModal.show();
+        }
+    </script>
+
+</body>
+</html>
